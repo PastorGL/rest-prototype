@@ -1,7 +1,9 @@
 package com.locomizer.resttest.rest;
 
+import com.locomizer.resttest.contraints.EnumValidator;
 import com.locomizer.resttest.dao.TestPojoDAO;
 import com.locomizer.resttest.entities.SearchPojo;
+import com.locomizer.resttest.entities.TestEnum;
 import com.locomizer.resttest.entities.TestPojo;
 import com.locomizer.resttest.service.TestPojoService;
 
@@ -58,5 +60,11 @@ public class PojoEndpoint {
     @Produces(MediaType.APPLICATION_JSON)
     public List<TestPojo> search(@BeanParam SearchPojo search) throws Exception {
         return testPojoService.search(search);
+    }
+
+    @POST
+    @Path("enum")
+    public boolean isThisEnum(@FormParam("enum") @EnumValidator(enumClass = TestEnum.class) String search) throws Exception {
+        return search != null;
     }
 }

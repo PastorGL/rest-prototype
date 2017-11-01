@@ -22,9 +22,10 @@ public class SearchPojo extends TestPojo {
         }
     }
 
-    @Override
     @FormParam("enum")
-    public void setTestEnum(TestEnum testEnum) {
-        super.setTestEnum(testEnum);
+    public void setTestEnum(String testEnum) {
+        if (!testEnum.isEmpty()) {
+            super.setTestEnum(TestEnum.valueOf(testEnum));
+        }
     }
 }

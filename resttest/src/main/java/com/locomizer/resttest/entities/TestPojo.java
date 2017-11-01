@@ -1,6 +1,5 @@
 package com.locomizer.resttest.entities;
 
-
 import io.github.pastorgl.fastdao.Column;
 import io.github.pastorgl.fastdao.FastEntity;
 import io.github.pastorgl.fastdao.PK;

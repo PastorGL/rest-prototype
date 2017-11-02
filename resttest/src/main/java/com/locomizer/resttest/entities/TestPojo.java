@@ -5,6 +5,8 @@ import io.github.pastorgl.fastdao.FastEntity;
 import io.github.pastorgl.fastdao.PK;
 import io.github.pastorgl.fastdao.Table;
 
+import java.util.Objects;
+
 @Table(TestPojo.TABLE_NAME)
 public class TestPojo extends FastEntity {
     public static final String TABLE_NAME = "test_pojo";
@@ -55,5 +57,21 @@ public class TestPojo extends FastEntity {
 
     public void setTestEnum(TestEnum testEnum) {
         this.testEnum = testEnum;
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof TestPojo)) return false;
+        TestPojo testPojo = (TestPojo) o;
+        return Objects.equals(id, testPojo.id) &&
+                Objects.equals(name, testPojo.name) &&
+                Objects.equals(flag, testPojo.flag) &&
+                testEnum == testPojo.testEnum;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, flag, testEnum);
     }
 }

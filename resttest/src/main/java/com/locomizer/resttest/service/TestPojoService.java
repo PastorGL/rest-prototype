@@ -1,5 +1,6 @@
 package com.locomizer.resttest.service;
 
+import com.locomizer.resttest.dao.EntityCountDAO;
 import com.locomizer.resttest.dao.TestPojoDAO;
 import com.locomizer.resttest.entities.SearchPojo;
 import com.locomizer.resttest.entities.TestPojo;
@@ -13,13 +14,18 @@ import java.util.StringJoiner;
 @Singleton
 public class TestPojoService {
     private TestPojoDAO testPojoDAO;
+    private EntityCountDAO entityCountDAO;
 
     @Inject
-    public TestPojoService(TestPojoDAO testPojoDAO) {
+    public TestPojoService(
+            TestPojoDAO testPojoDAO,
+            EntityCountDAO entityCountDAO
+    ) {
         this.testPojoDAO = testPojoDAO;
+        this.entityCountDAO = entityCountDAO;
     }
 
-    public List<TestPojo> search(SearchPojo search) throws Exception {
+    public List<TestPojo> search(SearchPojo search) {
         List args = new ArrayList();
         StringJoiner sb = new StringJoiner(" AND ");
         if (search.getId() != null) {
@@ -46,4 +52,27 @@ public class TestPojoService {
         return testPojoDAO.select("SELECT * FROM " + TestPojo.TABLE_NAME + " WHERE " + sb.toString(), args.toArray());
     }
 
+    public List<TestPojo> getAll() {
+        return testPojoDAO.getAll();
+    }
+
+    public TestPojo getByPK(Long pojoId) {
+        return testPojoDAO.getByPK(pojoId);
+    }
+
+    public Object insert(TestPojo pojo) {
+        return testPojoDAO.insert(pojo);
+    }
+
+    public void deleteByPK(Long pojoId) {
+        testPojoDAO.deleteByPK(pojoId);
+    }
+
+    public void update(TestPojo pojo) {
+        testPojoDAO.update(pojo);
+    }
+
+    public Long getCount() {
+        return entityCountDAO.getCount(TestPojo.class);
+    }
 }

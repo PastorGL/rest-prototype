@@ -28,13 +28,11 @@ public class TestPojoDAO extends FastDAO<TestPojo> {
         return super.getAll();
     }
 
-    @Override
-    public TestPojo getByPK(Object pk) {
+    public TestPojo getByPK(Long pk) {
         return super.getByPK(pk);
     }
 
-    @Override
-    public void deleteByPK(Object pk) throws Exception {
+    public void deleteByPK(Long pk) {
         super.deleteByPK(pk);
     }
 }
